@@ -6,15 +6,7 @@ import csv
 import multiprocessing as mp
 from functools import partial
 
-
-def Func(data_input, output_sign, X):
-    # res_load, v, PV_sr, PV_Ta, EV_dep, EV_arr, EV_initsoc, EV_sign, rand_PV, rand_WT, rand_load
-    Y = data_input
-    hres = EVHres(X[0], X[1], X[2], X[3], X[4], Y[0], Y[1], Y[2], Y[3], Y[4], Y[5], Y[6], Y[7], Y[8], Y[9], Y[10], output_sign)
-    return hres.hresrun()
-
-
-# PV_N, WT_N, BT_N, DG_N are decision variables
+# PV_N, WT_N, BT_N, INV_AD_N, INV_DA_N are decision variables
 
 class EVHres:
     def __init__(self, PV_N, WT_N, BT_N, INV_AD_N, INV_DA_N, res_load, v, PV_sr, PV_Ta, EV_dep, EV_arr, EV_ini, EV_sign, rand1, rand2,
@@ -624,6 +616,13 @@ class EVHres:
             df_sys.to_excel(path, index=False)
 
         return result
+
+
+def Func(data_input, output_sign, X):
+    # res_load, v, PV_sr, PV_Ta, EV_dep, EV_arr, EV_initsoc, EV_sign, rand_PV, rand_WT, rand_load
+    Y = data_input
+    hres = EVHres(X[0], X[1], X[2], X[3], X[4], Y[0], Y[1], Y[2], Y[3], Y[4], Y[5], Y[6], Y[7], Y[8], Y[9], Y[10], output_sign)
+    return hres.hresrun()
 
 
 '''
